@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 업로드</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='background2.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>이미지를 업로드하세요 (PNG, JPG만 가능)</h1>
+        <form action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="studentId" value="{{ request.args.get('student_id') }}">
+            <input type="hidden" name="studentName" value="{{ request.args.get('student_name') }}">
+            <input type="file" name="file" accept=".png, .jpg, .jpeg" required>
+            <button type="submit" class="upload-button">업로드</button>
+        </form>
+        
+        {% if error %}
+            <div class="flash">{{ error }}</div>
+        {% endif %}
+        
+        {% if success %}
+            <p>이미지가 성공적으로 업로드되었습니다!</p>
+            <a href="{{ url_for('index') }}" class="home-button">홈으로</a>
+        {% endif %}
+    </div>
+</body>
+</html>

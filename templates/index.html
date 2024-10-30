@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>학번 및 이름 입력</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='background3.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>학번과 이름을 입력하세요</h1>
+        <form action="{{ url_for('index') }}" method="post">
+            <label for="studentId">학번:</label>
+            <input type="text" id="studentId" name="studentId" required>
+            <label for="studentName">이름:</label>
+            <input type="text" id="studentName" name="studentName" required>
+            <button type="submit">다음</button>
+        </form>
+        {% if error %}
+            <div class="flash">{{ error }}</div>
+        {% endif %}
+    </div>
+
+    <div class="container search-container">
+        <h1>시간표 검색</h1>
+        <form action="{{ url_for('search_timetable') }}" method="post">
+            <label for="searchName">이름:</label>
+            <input type="text" id="searchName" name="searchName" required>
+            <button type="submit" class="search-button">검색</button>
+        </form>
+        {% if search_error %}
+            <div class="flash">{{ search_error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

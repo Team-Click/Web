@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ info.name }}의 시간표</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="timetable-container"> <!-- 시간표 테이블을 넓게 표시하는 컨테이너 -->
+        <h1 class="timetable-title">{{ info.name }}의 시간표</h1> <!-- 중앙 정렬 클래스 추가 -->
+        <table class="timetable">
+            <tr>
+                <th>수업명</th>
+                <th>요일</th>
+                <th>시작 시간</th>
+                <th>종료 시간</th>
+                <th>장소</th>
+            </tr>
+            {% for item in schedule %}
+            <tr>
+                <td>{{ item.class_name }}</td>
+                <td>
+                    {% for day in item.class_days %}
+                        {{ ["월", "화", "수", "목", "금"][day - 1] }}
+                    {% endfor %}
+                </td>
+                <td>{{ item.start_time }}</td>
+                <td>{{ item.end_time }}</td>
+                <td>{{ item.location }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <!-- "홈으로" 버튼을 가운데 정렬하기 위한 div -->
+        <div class="home-button-container">
+            <a href="{{ url_for('index') }}" class="home-button">홈으로</a>
+        </div>
+    </div>
+</body>
+</html>

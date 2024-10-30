@@ -1,0 +1,151 @@
+/* 기본 바디 설정 */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed; /* 스크롤 시 배경 이미지 고정 */
+}
+
+/* 두 박스가 가로로 정렬되고, 간격이 떨어지도록 설정 */
+.wrapper {
+    display: flex;                   /* 가로 정렬 */
+    justify-content: center;         /* 중앙 정렬 */
+    gap: 40px;                       /* 두 박스 간격 설정 */
+    margin-top: 20px;                /* 상단에 추가 여백 */
+}
+
+.container {
+    text-align: center;
+    width: 30%;                      /* 화면에 맞추기 위해 너비를 비율로 설정 */
+    max-width: 400px;                /* 각 박스의 최대 너비 설정 */
+    height: 300px;                   /* "학번과 이름을 입력하세요" 박스 높이에 맞추기 */
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 0 20px;                  /* 각 박스에 좌우 여백 추가 */
+    overflow-x: auto;
+}
+
+/* 레이블 및 입력 필드 스타일 */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"], input[type="file"] {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 12px;             /* 둥근 모서리 */
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+.upload-button {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;                     /* 버튼을 컨테이너 너비에 맞춤 */
+    margin-top: 15px;
+}
+
+/* 검색 버튼 가로 크기 조절 */
+.search-button {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 40%;                      /* 검색 버튼의 가로 크기를 줄임 */
+    margin-top: 15px;
+}
+
+.upload-button:hover, .search-button:hover {
+    background-color: #45a049;
+}
+
+/* 홈으로 버튼 스타일 */
+.home-button {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+/* 오류 메시지 스타일 */
+.flash {
+    margin-top: 10px;
+    color: red;
+}
+/* 시간표 제목 스타일 */
+.timetable-title {
+    text-align: center;            /* 텍스트를 중앙 정렬 */
+    margin-bottom: 20px;           /* 제목과 테이블 간 여백 추가 */
+}
+
+/* 시간표 테이블을 담는 넓은 컨테이너 스타일 */
+.timetable-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-x: auto;
+}
+
+/* 시간표 테이블 스타일 */
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.timetable th, .timetable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.timetable th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* "홈으로" 버튼을 가운데 정렬하는 컨테이너 */
+.home-button-container {
+    display: flex;
+    justify-content: center;      /* 버튼을 가운데 정렬 */
+    margin-top: 20px;
+}
+
+/* "홈으로" 버튼 스타일 */
+.home-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    text-decoration: none;
+}
