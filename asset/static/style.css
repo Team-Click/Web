@@ -1,0 +1,180 @@
+/* 기본 바디 설정 */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed; /* 스크롤 시 배경 이미지 고정 */
+}
+
+/* 메인 컨테이너 스타일 */
+.container {
+    text-align: center;
+    width: 25%;
+    max-width: 350px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 20px;
+    overflow-x: auto;
+}
+
+/* 협업 시간표 검색 컨테이너 스타일 */
+.container.collaborative-container {
+    height: auto;
+}
+
+/* 레이블 및 입력 필드 스타일 */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"], input[type="file"] {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+/* 협업 대상 리스트 스타일 */
+#collaborativeListContainer {
+    margin-top: 15px;
+}
+
+#collaborativeList {
+    list-style-type: none;
+    padding: 0;
+    color: #333;
+    font-size: 14px;
+}
+
+/* 버튼 스타일 */
+.upload-button, .search-button, .input-button {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.search-button, .input-button {
+    width: 40%;
+    margin: 5px;
+}
+
+.upload-button:hover, .search-button:hover, .input-button:hover {
+    background-color: #45a049;
+}
+
+/* 오류 메시지 스타일 */
+.flash {
+    margin-top: 10px;
+    color: red;
+}
+
+/* 시간표 제목 스타일 */
+.timetable-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 시간표를 포함하는 컨테이너 */
+.timetable-container {
+    width: 90%;
+    max-width: 1200px;
+    max-height: 80vh;
+    overflow-y: auto;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 시간표 테이블 스타일 */
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+/* 요일 및 시간 헤더 스타일 */
+.timetable th, .time-header {
+    background-color: #ddd;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid #bbb;
+}
+
+/* 각 셀 기본 스타일 */
+.timetable td {
+    border: 1px solid #ddd;
+    height: 40px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #fff;
+    padding: 5px;
+}
+
+/* 좌측 상단 및 하단 모서리 둥글게 */
+.timetable th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.timetable td:first-child:last-child {
+    border-bottom-left-radius: 12px;
+}
+
+/* 우측 상단 및 하단 모서리 둥글게 */
+.timetable th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.timetable td:last-child:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* 협업 시간표 상태 스타일 */
+.timetable td.status-available {
+    color: green;
+    font-weight: bold;
+}
+
+.timetable td.status-unavailable {
+    color: red;
+    font-weight: bold;
+}
+
+/* "홈으로" 버튼을 가운데 정렬하는 컨테이너 */
+.home-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* "홈으로" 버튼 스타일 */
+.home-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+}

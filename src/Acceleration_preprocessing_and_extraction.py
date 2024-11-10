@@ -17,11 +17,11 @@ OUTPUT_JSON_DIR = "/Users/apple/Desktop/Python/2nd_Grade/Competition/TEAM-CLICK/
 PROCESSED_FILES = set(os.listdir(INPUT_DIR))  # 초기 실행 시 input 폴더에 있는 파일을 기록하여 무시
 
 # 클로바 OCR API 정보
-CLOVA_API_URL = 'https://t1cmuqa04b.apigw.ntruss.com/custom/v1/35384/2a546985327b27f54f740d618b812447f784037871b463869819c765793d4fa3/general'
-CLOVA_SECRET_KEY = 'VktmeXNLd09QQUFnU3JURkFkeHZQZElUSHJoa094V0U='
+# CLOVA_API_URL = url
+CLOVA_SECRET_KEY = 'key'
 
 # GPT-4 API 정보
-openai.api_key = "sk-mTS1Ed5j7XUCkoTsrtIfC4OLNI25HGr14igfxyxqjTT3BlbkFJoq3MmVAd5S64WbLDQ5BQ0u_XDDllIrTxQkeoFKfSkA"  # 실제 API 키 입력
+openai.api_key = "key"  # 실제 API 키 입력
 
 def process_image(image_path, output_dir):
     """1_Image preprocessing.py에서 가져온 이미지 전처리 함수"""
