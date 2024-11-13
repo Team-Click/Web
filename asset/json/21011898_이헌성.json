@@ -17,48 +17,48 @@
         {
             "class_name": "알고리즘및실습",
             "class_days": [
-                1
+                3
             ],
             "start_time": "13:00",
-            "end_time": "15:00",
+            "end_time": "14:30",
             "location": "센B108"
         },
         {
             "class_name": "창업과기업가정신1",
             "class_days": [
-                2
+                3
             ],
-            "start_time": "13:00",
-            "end_time": "15:00",
+            "start_time": "14:30",
+            "end_time": "16:00",
             "location": "학대공연장"
         },
         {
             "class_name": "EnglishReadingPractice1",
             "class_days": [
-                2
+                3
             ],
-            "start_time": "13:00",
-            "end_time": "15:00",
+            "start_time": "16:00",
+            "end_time": "17:30",
             "location": "세108"
         },
         {
             "class_name": "확률통계및프로그래밍",
             "class_days": [
-                3,
-                4
+                4,
+                5
             ],
             "start_time": "16:00",
-            "end_time": "18:00",
+            "end_time": "17:30",
             "location": "센B104"
         },
         {
             "class_name": "동적시스템모델링",
             "class_days": [
-                3,
-                4
+                4,
+                5
             ],
-            "start_time": "16:00",
-            "end_time": "18:00",
+            "start_time": "17:30",
+            "end_time": "19:00",
             "location": "센B106"
         },
         {
