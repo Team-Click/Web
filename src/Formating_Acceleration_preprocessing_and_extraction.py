@@ -8,6 +8,7 @@ import numpy as np
 import cv2
 import requests
 import openai
+import os
 
 # 기본 경로 설정
 INPUT_DIR = "/Users/apple/Desktop/Python/2nd_Grade/Competition/TEAM-CLICK/asset/images/input"

@@ -170,15 +170,29 @@ def analyze_schedule_with_openai(ocr_text, output_json_path, student_name, stude
 
 def monitor_and_process_images():
     """지정된 폴더에서 새로운 이미지를 감지하고 처리"""
+    valid_extensions = {"png", "jpg", "jpeg"}  # 허용되는 확장자 집합
+    processed_files = PROCESSED_FILES.copy()  # 중복 체크를 위해 초기화
+
     while True:
         current_files = set(os.listdir(INPUT_DIR))
-        new_files = current_files - PROCESSED_FILES
+        new_files = current_files - processed_files
 
         for filename in new_files:
+            # 파일 확장자 확인
+            file_extension = filename.split(".")[-1].lower()
+            if file_extension not in valid_extensions:
+                print(f"[{datetime.now()}] Error: Invalid file extension for '{filename}'. Only PNG, JPG, JPEG files are allowed.")
+                continue
+
             # "학번_이름.확장자" 형식 검사 (8자리 학번만 허용)
-            match = re.match(r"^(\d{8})_([\w가-힣]+)\.(jpg|png|jpeg)$", filename)
+            match = re.match(r"^(\d{8})_([\w가-힣]+)\.(png|jpg|jpeg)$", filename, re.IGNORECASE)
             if not match:
                 print(f"[{datetime.now()}] Ignored file: {filename} (does not match '학번_이름.확장자' format)")
+                continue
+
+            # 중복 파일 확인
+            if filename in processed_files:
+                print(f"[{datetime.now()}] Warning: Duplicate file detected: {filename}. Ignoring.")
                 continue
 
             student_id = match.group(1)
@@ -205,10 +219,10 @@ def monitor_and_process_images():
             analyze_schedule_with_openai(ocr_text, output_json_path, student_name, student_id)
 
             # 처리된 파일 추가
-            PROCESSED_FILES.add(filename)
+            processed_files.add(filename)
 
-        # # 5초 대기
-        # time.sleep(5)
+        time.sleep(5)  # 5초 대기
+
 
 
 if __name__ == "__main__":
