@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Upload</title>
+</head>
+<body>
+    <h1>로그인 및 이미지 업로드</h1>
+    <form id="loginForm">
+        <label for="id">아이디:</label>
+        <input type="text" id="id" name="id" required>
+        <br>
+        <label for="pw">비밀번호:</label>
+        <input type="password" id="pw" name="pw" required>
+        <br>
+        <button type="submit">로그인</button>
+    </form>
+
+    <div id="imageUploadSection" style="display:none;">
+        <h2>이미지 업로드</h2>
+        <form id="imageUploadForm" enctype="multipart/form-data">
+            <input type="hidden" id="hiddenId" name="id">
+            <label for="image">이미지 파일 (png, jpg만 가능):</label>
+            <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png" required>
+            <br>
+            <button type="submit">이미지 업로드</button>
+        </form>
+    </div>
+
+    <p id="responseMessage"></p>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const imageUploadSection = document.getElementById('imageUploadSection');
+        const imageUploadForm = document.getElementById('imageUploadForm');
+        const responseMessage = document.getElementById('responseMessage');
+        const hiddenId = document.getElementById('hiddenId');
+
+        let authToken = null;
+
+        // 로그인 처리
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('id').value;
+            const pw = document.getElementById('pw').value;
+
+            try {
+                const response = await fetch('http://127.0.0.1:5002/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id, pw }),
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    responseMessage.textContent = "로그인 성공";
+                    responseMessage.style.color = 'green';
+                    authToken = data.token;
+                    hiddenId.value = id; // 업로드 폼에 ID 전달
+                    imageUploadSection.style.display = "block"; // 이미지 업로드 섹션 표시
+                } else {
+                    responseMessage.textContent = data.message;
+                    responseMessage.style.color = 'red';
+                }
+            } catch (error) {
+                responseMessage.textContent = "서버와 통신 중 오류가 발생했습니다.";
+                responseMessage.style.color = 'red';
+            }
+        });
+
+        // 이미지 업로드 처리
+        imageUploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const imageFile = document.getElementById('image').files[0];
+            const formData = new FormData();
+            formData.append('id', hiddenId.value); // ID 추가
+            formData.append('image', imageFile);
+
+            try {
+                const response = await fetch('http://127.0.0.1:5002/upload-image', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': authToken, // 토큰 추가
+                    },
+                    body: formData,
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    responseMessage.textContent = "이미지 업로드 성공!";
+                    responseMessage.style.color = 'green';
+                } else {
+                    responseMessage.textContent = data.message;
+                    responseMessage.style.color = 'red';
+                }
+            } catch (error) {
+                responseMessage.textContent = "이미지 업로드 중 오류가 발생했습니다.";
+                responseMessage.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
