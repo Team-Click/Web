@@ -39,9 +39,9 @@ os.makedirs(TEMP_JSON_DIR, exist_ok=True)
 os.makedirs(OUTPUT_JSON_DIR, exist_ok=True)
 
 # API 키 파일 상대 경로 설정
-CLOVA_API_URL_PATH = os.path.join(current_dir, "key", "CLOVA_API_URL.txt")
-CLOVA_SECRET_KEY_PATH = os.path.join(current_dir, "key", "CLOVA_SECRET_KEY.txt")
-OPENAI_API_KEY_PATH = os.path.join(current_dir, "key", "openai_api_key.txt")
+CLOVA_API_URL_PATH = os.path.join(BASE_DIR, "key", "CLOVA_API_URL.txt")
+CLOVA_SECRET_KEY_PATH = os.path.join(BASE_DIR, "key", "CLOVA_SECRET_KEY.txt")
+OPENAI_API_KEY_PATH = os.path.join(BASE_DIR, "key", "openai_api_key.txt")
 
 # API 키 파일 로드 함수
 def load_api_key(file_path):
