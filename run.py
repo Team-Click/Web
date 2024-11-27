@@ -38,15 +38,15 @@ os.makedirs(OUTPUT_IMAGE_DIR, exist_ok=True)
 os.makedirs(TEMP_JSON_DIR, exist_ok=True)
 os.makedirs(OUTPUT_JSON_DIR, exist_ok=True)
 
+# API 키 파일 상대 경로 설정
+CLOVA_API_URL_PATH = os.path.join(current_dir, "key", "CLOVA_API_URL.txt")
+CLOVA_SECRET_KEY_PATH = os.path.join(current_dir, "key", "CLOVA_SECRET_KEY.txt")
+OPENAI_API_KEY_PATH = os.path.join(current_dir, "key", "openai_api_key.txt")
+
 # API 키 파일 로드 함수
 def load_api_key(file_path):
     with open(file_path, "r") as file:
         return file.read().strip()
-
-# API 키 파일 경로 설정
-CLOVA_API_URL_PATH = "/Users/apple/Desktop/Python/2nd_Grade/Competition/TEAM-CLICK/lib/CLOVA_API_URL.txt"
-CLOVA_SECRET_KEY_PATH = "/Users/apple/Desktop/Python/2nd_Grade/Competition/TEAM-CLICK/lib/CLOVA_SECRET_KEY.txt"
-OPENAI_API_KEY_PATH = "/Users/apple/Desktop/Python/2nd_Grade/Competition/TEAM-CLICK/lib/openai_api_key.txt"
 
 # API 키 로드
 CLOVA_API_URL = load_api_key(CLOVA_API_URL_PATH)
