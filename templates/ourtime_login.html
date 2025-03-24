@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 페이지</title>
+  <link rel="stylesheet" href="/static/csss/integrated.css">
+  <style>
+    @font-face {
+      font-family: 'SMUSnowflake-Bold';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2409-2@1.0/SMUSnowflake-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'SMUSnowflake-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2409-2@1.0/SMUSnowflake-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+      .login-container {
+        width: 90%;
+        padding: 1.5rem;
+      }
+
+      input, button {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      button {
+        height: 50px;
+      }
+    }
+
+    /* 전체 바디 스타일 */
+    body {
+      font-family: 'SMUSnowflake-Regular', 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      width: 20%;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'SMUSnowflake-Bold', Arial, sans-serif;
+      color: #b93234;
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-family: 'SMUSnowflake-Regular', Arial, sans-serif;
+    }
+
+    input {
+      width: 93%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      height: 45px;
+      padding: 0.7rem;
+      background-color: #b93234;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: 'SMUSnowflake-Bold', Arial, sans-serif;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    button:hover {
+      background-color: #a12b2d;
+    }
+
+    #studentIdMessage, #passwordMessage {
+      color: #b93234;
+      font-size: 0.9rem;
+      margin: 0;
+      margin-bottom: 30px;
+    }
+
+    #message {
+      color: #b93234;
+      font-family: 'SMUSnowflake-Regular', Arial, sans-serif;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>로그인</h1>
+    <form id="loginForm">
+      <label for="studentId">아이디</label>
+      <input type="text" id="studentId" name="studentId">
+      <p id="studentIdMessage"></p> <!-- 학번 오류 메시지 -->
+      
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" name="password">
+      <p id="passwordMessage"></p> <!-- 비밀번호 오류 메시지 -->
+      
+      <button type="submit">로그인</button>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    // 로그인 폼 제출 이벤트 리스너
+    document.getElementById('loginForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // 기본 폼 제출 방지
+
+      // 입력값 가져오기
+      const studentId = document.getElementById('studentId').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // 오류 메시지 초기화
+      document.getElementById('studentIdMessage').textContent = '';
+      document.getElementById('passwordMessage').textContent = '';
+      document.getElementById('message').textContent = '';
+
+      // 유효성 검사 플래그
+      let hasError = false;
+
+      // 학번 유효성 검사
+      if (!studentId) {
+        document.getElementById('studentIdMessage').textContent = "아이디가 입력되지 않았습니다.";
+        hasError = true;
+      }
+
+      // 비밀번호 유효성 검사
+      if (!password) {
+        document.getElementById('passwordMessage').textContent = "비밀번호가 입력되지 않았습니다.";
+        hasError = true;
+      }
+
+      // 오류가 있으면 서버 요청 중단
+      if (hasError) return;
+
+      try {
+        // 서버로 데이터 전송
+        const response = await fetch('http://127.0.0.1:5002/login', { // 플라스크 서버 주소
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json', // JSON 데이터 전송
+          },
+          body: JSON.stringify({ id: studentId, pw: password }), // 입력값 JSON 변환
+        });
+
+        const result = await response.json(); // 서버 응답 데이터 받기
+
+        if (result.status === 'success') {
+          document.getElementById('message').textContent = "로그인이 성공하였습니다.";
+          document.getElementById('message').style.color = 'green';
+        } else {
+          document.getElementById('message').textContent = result.message; // 실패 메시지 출력
+          document.getElementById('message').style.color = 'red';
+        }
+      } catch (error) {
+        console.error("서버 요청 중 오류가 발생했습니다.", error); // 오류 로그 출력
+        document.getElementById('message').textContent = "서버 오류가 발생했습니다. 나중에 다시 시도해 주세요."; // 오류 메시지 출력
+        document.getElementById('message').style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>
